@@ -1,0 +1,26 @@
+{
+  "name": "nosql_image_database",
+  "version": "1.0.0",
+  "description": "Run a REST API for retrieving, deleting and resizing images, stored in a MongoDb container and written in NodeJS",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node src",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zavies97/NoSQL_Image_Database.git"
+  },
+  "author": "Zac Davies",
+  "license": "ISC",
+  "homepage": "https://github.com/zavies97/NoSQL_Image_Database#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "eslint": "^7.15.0",
+    "express": "^4.17.1"
+  }
+}
