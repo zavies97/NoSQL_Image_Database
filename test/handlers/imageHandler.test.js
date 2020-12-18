@@ -1,0 +1,1 @@
+// file to test imageHandler. Use Typescript project as basis (mocha not jest)

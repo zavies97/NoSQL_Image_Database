@@ -1,0 +1,1 @@
+// Same as imageHandler.test.js, but for restapi (mock endpoint calls)
