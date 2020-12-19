@@ -1,7 +1,15 @@
 const sizeOf = require('image-size');
 const image = './test/resources/imageExample.jpeg';
 const image2 = './test/resources/imageExample2.jpg';
-const {dropDatabase, uploadImage, getOneImage, getAllImages, resizeImage, deleteImage, healthCheck} = require('../../src/handlers/imageHandler');
+const {
+    dropDatabase, 
+    uploadImage, 
+    getOneImage, 
+    getAllImages, 
+    resizeImage, 
+    deleteImage, 
+    healthCheck
+} = require('../../src/handlers/imageHandler');
 
 const expect = require('chai').expect;
 
@@ -37,10 +45,10 @@ describe('Image database calls', () => {
         expect(dimensions.width).to.equal(retrievedImage.width);
     })
 
-    it('should get all images form the database', async () => {
+    it('should get all images from the database', async () => {
         await uploadImage('testImage2', image2);
 
-        const retrievedImages = await getAllImages();;
+        const retrievedImages = await getAllImages();
 
         expect(retrievedImages).to.have.length(2);
         
@@ -54,12 +62,20 @@ describe('Image database calls', () => {
     })
 
     it("should delete an image and throw 'Image object not found' error when trying to retrieve deleted image", async() => {
-        await deleteImage('testImage2');
+        const deleted = await deleteImage('testImage2');
 
         const retrievedImages = await getOneImage('testImage2');
 
+        expect(deleted.deletedCount).to.equal(1);
         expect(retrievedImages).to.equal(null);
     })
+
+    it("should not delete an image if image doesnt exist", async() => {
+        const deleted = await deleteImage('testImage3');
+
+        expect(deleted.deletedCount).to.equal(0);
+    })
+
 
     it('should check the db status', async() => {
         const status = await healthCheck();

@@ -46,6 +46,7 @@ const uploadImage = async(name, file) => {
     await imageFiles.insertOne(objectToSend);
 
     await connection.close();
+
 }
 
 const getOneImage = async(name) => {
@@ -102,9 +103,11 @@ const resizeImage = async(name, height, width) => {
     });
 
     await connection.close();
-
-    foundImage.width = width;
-    foundImage.height = height;
+    
+    if (foundImage) {
+        foundImage.width = width;
+        foundImage.height = height;
+    }
 
     return foundImage;
 
@@ -121,9 +124,11 @@ const deleteImage = async(name) => {
 
     const imageFiles = db.collection('imagefiles');
 
-    await imageFiles.deleteOne({name: name});
+    const deleted = await imageFiles.deleteOne({name: name});
 
     await connection.close();
+
+    return deleted;
 }
 
 const healthCheck = async() => {
