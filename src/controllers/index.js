@@ -102,16 +102,12 @@ app.get('/v1/resize/:name', async (req, res) => {
 
     } else {
 
-        console.log('starts this');
         const resizedImage = await resizeImage(fileName, height, width);
-
-        console.log(resizedImage);
 
         if (resizedImage) {
             res.status(200);
             res.send(resizedImage);
         } else {
-            console.log('gets here');
             res.status(404)
             res.send('Image object not found');
         }
